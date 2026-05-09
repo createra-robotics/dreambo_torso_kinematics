@@ -10,13 +10,13 @@ const HEAD_Z_OFFSET: f64 = 0.177;
 
 #[gen_stub_pyclass]
 #[pyclass(frozen)]
-struct DreamboRustKinematics {
+struct DreamboTorsoKinematics {
     inner: std::sync::Mutex<Kinematics>,
 }
 
 #[gen_stub_pymethods]
 #[pymethods]
-impl DreamboRustKinematics {
+impl DreamboTorsoKinematics {
     #[new]
     fn new(motor_arm_length: f64, rod_length: f64) -> Self {
         Self {
@@ -449,7 +449,7 @@ impl Kinematics {
 
 #[pyo3::pymodule]
 fn dreambo_torso_kinematics(m: &Bound<'_, PyModule>) -> PyResult<()> {
-    m.add_class::<DreamboRustKinematics>()?;
+    m.add_class::<DreamboTorsoKinematics>()?;
     Ok(())
 }
 
@@ -479,7 +479,7 @@ mod tests {
                 motor.branch_position[1],
                 motor.branch_position[2],
             );
-            let T_motor_world = nalgebra::Matrix4::new(
+            let t_motor_world = nalgebra::Matrix4::new(
                 motor.T_motor_world[0][0],
                 motor.T_motor_world[0][1],
                 motor.T_motor_world[0][2],
@@ -500,7 +500,7 @@ mod tests {
             let solution = if motor.solution != 0.0 { 1.0 } else { -1.0 };
             kinematics.add_branch(
                 branch_position,
-                T_motor_world.try_inverse().unwrap(),
+                t_motor_world.try_inverse().unwrap(),
                 solution,
             );
         }

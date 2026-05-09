@@ -1,10 +1,10 @@
-from dreambo_torso_kinematics import DreamboRustKinematics
+from dreambo_torso_kinematics import DreamboTorsoKinematics
 
 import time
 import json
 import numpy as np
 
-kin = DreamboRustKinematics(0.038, 0.09)
+kin = DreamboTorsoKinematics(0.038, 0.09)
 head_z_offset = 0.177
 
 with open("motors.json", "r") as f:
