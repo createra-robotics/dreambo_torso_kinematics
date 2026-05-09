@@ -1,0 +1,8 @@
+/target
+*.pyi
+
+# JetBrains
+/.idea
+
+# macOS Finder
+.DS_Store
