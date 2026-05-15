@@ -1,0 +1,6 @@
+{
+  "arm_arc": 0.7,
+  "coupler_arc": 0.5,
+  "branch": "positive",
+  "mirror": false
+}
